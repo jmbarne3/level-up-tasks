@@ -20,7 +20,7 @@ const Login = () => {
     }
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth,
         username,
         password
