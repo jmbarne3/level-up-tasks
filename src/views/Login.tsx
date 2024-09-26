@@ -47,7 +47,10 @@ const Login = () => {
 
   return (
     <Container className="d-flex justify-content-center vh-100 align-items-center">
-      <Card className="py-4 px-4 col-4">
+      <Card className="col-12 col-md-6 col-lg-4">
+        <Card.Header>
+          <h1>Login</h1>
+        </Card.Header>
         <Card.Body>
           { error !== "" && (
             <Alert variant="danger">

@@ -28,10 +28,9 @@ const MainNav = () => {
   }, []);
 
   return (
-    <Navbar className="mb-4" bg="dark" data-bs-theme="dark">
+    <Navbar expand="lg" className="mb-4" bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Brand as={Link} to='/'>Level-Up Tasks</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
@@ -53,6 +52,7 @@ const MainNav = () => {
             </Dropdown.Menu>
           </Dropdown>
         )}
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
       </Container>
     </Navbar>
   );
