@@ -1,7 +1,8 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebase-config';
+import { auth, db } from '../firebase-config';
 import React, { useState } from "react";
 import { Alert, Button, Card, Container, Form } from "react-bootstrap";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -28,7 +29,13 @@ const SignUp = () => {
       );
 
       const user = userCredentials.user;
-      console.log(user);
+
+      await setDoc(doc(db, 'userProfiles', user.uid), {
+        user_id: user.uid,
+        created: Timestamp.now(),
+        updated: Timestamp.now()
+      });
+
     } catch (error: any) {
       setError(error.message);
     }

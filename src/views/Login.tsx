@@ -2,8 +2,9 @@ import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 
 import React, { useState } from "react";
 import { Alert, Card, Container, Form, Button, ButtonGroup } from "react-bootstrap";
 
-import { auth } from '../firebase-config';
+import { auth, db } from '../firebase-config';
 import { Link, useNavigate } from "react-router-dom";
+import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 
 const Login = () => {
   const [username, setUsername] = useState<string>("");
@@ -36,10 +37,25 @@ const Login = () => {
   const SignInWithGoogle = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider).then(() => {
-        navigate('/');
-      });
 
+      await signInWithPopup(auth, provider).then(async (credential) => {
+        try {
+          await getDoc(doc(db, 'userProfiles', credential.user.uid))
+            .then(() => {
+              navigate('/');
+            }).catch((err) => {
+              setError(err.message);
+            });
+        } catch (_: any) {
+          await setDoc(doc(db, 'userProfiles', credential.user.uid), {
+            user_id: credential.user.uid,
+            created: Timestamp.now(),
+            updated: Timestamp.now()
+          }).then(() => {
+            navigate('/');
+          });
+        }
+     });
     } catch (err: any) {
       setError(err.message);
     }
