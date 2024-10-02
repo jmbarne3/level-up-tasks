@@ -5,6 +5,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import MainNav from './components/MainNav';
 import SignUp from './views/SignUp';
+import Profile from './views/Profile';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </>
   )

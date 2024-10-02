@@ -5,7 +5,12 @@ service cloud.firestore {
     match /userProfiles/{document=**} {
       allow read : if resource.id == request.auth.uid;
       allow write : if resource.id == request.auth.uid;
-      allow create: if !exists(/databases/$(database)/documents/userProfiles/$(request.auth.uid));
+      allow create : if !exists(/databases/$(database)/documents/userProfiles/$(request.auth.uid));
+    }
+    match /userChildren/{document=**} {
+    	allow read : if resource.parent_id == request.auth.uid;
+      allow write : if resource.parent_id == request.auth.uid;
+      allow create : if request.resource.data.parent_id == request.auth.uid;
     }
     match /{document=**} {
       allow read, write: if false;
