@@ -1,11 +1,9 @@
 import { onAuthStateChanged, User, getAuth, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { Container, Dropdown, Image, Nav, Navbar } from "react-bootstrap";
+import { Container, Dropdown, Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 import { auth } from "../firebase-config";
-
-import icon from '../assets/lvluptasks.png';
 
 const MainNav = () => {
   const [user, setUser] = useState<User|null>(null);
@@ -33,7 +31,7 @@ const MainNav = () => {
     <Navbar expand="lg" className="mb-4" bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Brand as={Link} to='/'>
-          <Image src={icon} alt="" width={30} height={30} />
+          Level-Up Tasks
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
